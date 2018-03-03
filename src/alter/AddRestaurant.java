@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import exception.OutOfLimitsException;
+
 @WebServlet("/addRestaurant")
 public class AddRestaurant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,9 @@ public class AddRestaurant extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int size=jarray.size();
+		System.out.println(jarray.toString());
 		FileWriter jsonWriter=null;
 		PrintWriter out=response.getWriter();
 		response.setContentType("application/json");
@@ -36,13 +41,18 @@ public class AddRestaurant extends HttpServlet {
 		object.put("image_url", request.getParameter("image_url"));
 		
 		if(count<10) {
-			jarray.add(object);
+			jarray.add(count,object);
+			count++;
 		}
 		else {
-			System.out.println("you have exceeded");
+			try {
+				throw new OutOfLimitsException();
+			} catch (OutOfLimitsException e) {
+				e.printStackTrace();
+			}
 		}
 		try {
-			jsonWriter=new FileWriter("favourite.json");
+			jsonWriter=new FileWriter("C:\\Users\\tgarg\\Desktop\\favourites.json");
 			jsonWriter.write(jarray.toString());
 			System.out.println(object.toString());
 		} catch (Exception e) {

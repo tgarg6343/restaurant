@@ -74,11 +74,12 @@ function remove(id){
 	
 	var xhttp = new XMLHttpRequest();
 	alert("remove"+id);
+	var showid="div"+id;
 	var url="http://localhost:8083/restaurant/deleteRestaurant?id="+id;
 	xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200) {
 	    	alert(xhttp.responseText);
-	       document.getElementById("para").innerHTML = xhttp.responseText;
+	       document.getElementById(showid).innerHTML = xhttp.responseText;
 	    }
 	};
 	xhttp.open("GET", url, true);

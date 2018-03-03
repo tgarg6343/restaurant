@@ -34,13 +34,17 @@ public class DeleteRestaurant extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		response.setContentType("application/json");
 		String id= request.getParameter("id");
-		int index=Integer.parseInt(id);
-		
+		int index=0;
+		FileReader reader=null;
 		try {
-			array=(JSONArray) parser.parse(new FileReader("favourite.json"));
+			reader=new FileReader("C:\\Users\\tgarg\\Desktop\\favourites.json");
+			array=(JSONArray)parser.parse(reader);
+			reader.close();
 			array.remove(index);
-			jsonWriter=new FileWriter("favourite.json");
+			System.out.println(array.toString());
+			jsonWriter=new FileWriter("C:\\Users\\tgarg\\Desktop\\favourites.json");
 			jsonWriter.write(array.toString());
+			jsonWriter.close();
 			out.print("restaurant is deleted");
 		} catch (ParseException e) {
 			e.printStackTrace();

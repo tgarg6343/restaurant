@@ -30,19 +30,21 @@ public class ShowRestaurant extends HttpServlet {
 		JSONObject object=new JSONObject();
 		JSONArray jsonArray=new JSONArray();
 		try {
-			jsonArray=(JSONArray) parser.parse(new FileReader("favourite.json"));
+			jsonArray=(JSONArray) parser.parse(new FileReader("C:\\Users\\tgarg\\Desktop\\favourites.json"));
 			String output=null;
 			
 			for (int i = 0; i <jsonArray.size(); i++) {
 				object=(JSONObject)jsonArray.get(i);
-				String id="id"+(i+1);
+				String id=String.valueOf((i+1));
+				String fn="remove(\'"+id+"\')";
 				output+="<div class=\"col-lg-4 col-md-6 col-sm-12\">";
 				output="<div class=\"card\">";
 				output+="<div class=\"card-block\">";
 				output+="<img class=\"card-img-top\" src=\""+object.get("image_url")+"\" alt=\"Card image\">";
 				output+="<h4 class=\"card-title\">"+object.get("name")+"</h4>";
 				output+="<p class=\"card-text\">"+object.get("location")+"<br>"+object.get("cuisines")+"<br>"+object.get("rating")+""+object.get("votes")+"</p>";
-				output+="<button type=\"button\" id=\""+id+"\"onclick=\"remove(\""+id+"\")\">Remove</button>";
+				output+="<button type=\"button\" id=\""+id+"\"onclick=\""+fn+"\">Remove</button>";
+				output+="<div id=\"div"+(i+1)+"\">division tag</div>";
 				output+="</div>";
 				output+="</div>";
 				out.write(output);
