@@ -1,2 +1,6 @@
 # restaurant
-This is a java script based server client application. The purpose of this application is to evaluate a document with respect to a standard document. It uses NATURAL library to perform the functionalities.I uses node js to run the application on server.
+This is a dynamic web project.
+It uses servlets, jsp and html,bootstrap.
+This project make use of Zomato api to fetch restaurant details.
+User will enter name keyword and restaurant will be displayed which containes that word.
+You can add favourites to your favourite list and also can remove from your favourites list
